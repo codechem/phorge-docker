@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+    nginx:
+      build: ./nginx/
+      container_name: nginx
+      ports:
+       - 1380:80
+      links:
+       - php
+      volumes:
+        - "./repos/arcanist:/arcanist"
+        - "./repos/phorge:/app"
+
+    php:
+      build: ./php/
+      container_name: php
+      volumes:
+        - "./repos/arcanist:/arcanist"
+        - "./repos/phorge:/app"
+
+    db:
+      image: mariadb
+      restart: always
+      environment:
+        MARIADB_ROOT_PASSWORD: example
+      volumes:
+        - mariadb:/var/lib/mysql
+volumes:
+  mariadb:
