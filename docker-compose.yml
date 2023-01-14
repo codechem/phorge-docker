@@ -23,7 +23,7 @@ services:
       image: mariadb
       restart: always
       environment:
-        MARIADB_ROOT_PASSWORD: example
+        MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
       volumes:
         - mariadb:/var/lib/mysql
 volumes:
